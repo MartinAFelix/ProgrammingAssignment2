@@ -1,15 +1,30 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
+#I TOOK THE MEAN EXAPLE AND ADAPT IT TO WORK WITH A MATRIX 
+# This takes a Matrix and saves it in cache 
+C:\Users\marti\Documents\GitHub\ProgrammingA
 makeCacheMatrix <- function(x = matrix()) {
-
+  invr <- NULL
+  set <- function(y) {
+    x <<- y
+  invr <<- NULL
+  }
+  get <- function() x
+  setinversa <- function(inverse) invr <<- inverse
+  getinversa <- function()invr
+  list(set = set, get = get,
+       setinversa = setinversa,
+       getinversa = getinversa)
 }
 
 
-## Write a short comment describing this function
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  invr <- x$getinversa()
+  if(!is.null(invr)) {
+    message("Getting cached data for your Matriz")
+    return(invr)
+  }
+  mat <- x$get()
+  invr <- solve(mat, ...)
+  x$setinversa(invr)
+  invr
 }
